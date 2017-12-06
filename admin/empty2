@@ -1,0 +1,129 @@
+<?php
+if (isset($_SESSION["notify"])) {
+	helper::onloadAlertDanger($_SESSION["notify"]);
+	unset($_SESSION["notify"]);
+}
+?>
+
+<div class="header">
+	<h1 class="page-header">
+	Tables Page
+	<small>Responsive tables</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#">Home</a>
+		</li>
+		<li>
+			<a href="#">Tables</a>
+		</li>
+		<li class="active">Data</li>
+	</ol>
+</div>
+<div id="page-inner">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Thêm sản phẩm
+		</div>
+		<div class="panel-body">
+			<form action="handle_php/h_add_hsx.php" id="frmThemHSX" method="POST">
+				<div class="form-group">
+					<label for="_TenHSX">Tên sản phẩm</label>
+					<input type="text" class="form-control" id="_TenHSX" name="txtTenHSX" placeholder="nhập tên hãng sản xuất" value=""  required >
+				</div>
+				<div class="form-group">
+					<label for="_GhiChu">Hình ảnh</label>
+					<div class="input-group image-preview">
+						<input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+						<span class="input-group-btn">
+							<!-- image-preview-clear button -->
+							<button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+							<span class="glyphicon glyphicon-remove"></span> Clear
+							</button>
+							<!-- image-preview-input -->
+							<div class="btn btn-default image-preview-input">
+								<span class="glyphicon glyphicon-folder-open"></span>
+								<span class="image-preview-input-title">Browse</span>
+								<input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
+							</div>
+						</span>
+						</div><!-- /input-group image-preview [TO HERE]-->
+					</div>
+					<div class="form-group">
+						<label for="_GhiChu">Giá bán</label>
+						<input type="text" class="form-control" id="_GhiChu" name="txtGhiChu" placeholder="nhập giá bán" value="" >
+					</div>
+					<div class="form-group">
+						<label for="_GhiChu">Chất liệu</label>
+						<input type="text" class="form-control" id="_GhiChu" name="txtGhiChu" placeholder="nhập chất liệu" value="" >
+					</div>
+					<div class="form-group">
+						<label for="_GhiChu">Thông tin</label>
+						<textarea name="content" id="editorThongTin" class="form-control" rows="3" required="required"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="_GhiChu">Số lượng</label>
+						<input type="text" class="form-control" id="_GhiChu" name="txtGhiChu" placeholder="nhập thông tin" value="" >
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-6">
+								<label for="_GhiChu">Màu sắc</label><br>
+								<label class="radio-inline"><input type="radio" checked name="optMauSac">Màu đã có</label>
+								<select class="form-control" id="sel1">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+								</select>
+								<label class="radio-inline">
+									<input type="radio" name="optMauSac">
+								Màu mới</label>
+								<input type="text" class="form-control" id="_GhiChu" name="txtGhiChu" placeholder="nhập màu sắc" value="" >
+							</div>
+							<div class="col-sm-6">
+								<label for="_GhiChu">Kích cỡ</label><br>
+								<label class="radio-inline"><input type="radio" checked name="optKichCo">Kích cỡ đã có</label>
+								<select class="form-control" id="sel1">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+								</select>
+								<label class="radio-inline"><input type="radio" name="optKichCo">Kích cỡ mới</label>
+								<input type="text" class="form-control" id="_GhiChu" name="txtGhiChu" placeholder="nhập kích cỡ" value="" >
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-6">
+								<label for="_GhiChu">Loại sản phẩm</label><br>
+								<select class="form-control" id="sel1">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+								</select>
+							</div>
+							<div class="col-sm-6">
+								<label for="_GhiChu">Hãng sản xuất</label><br>
+								<select class="form-control" id="sel1">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<a class="btn btn-default" href="index.php?page=hang-san-xuat"><i class="fa fa-arrow-left"></i> Quay lại</a>
+					<button class="btn btn-primary"><i class="fa fa-save"></i> Lưu hãng sản xuất</button>
+				</form>
+			</div>
+		</div>
+		<div class="result"></div>
+	</div>
+	<script>
+	CKEDITOR.replace( 'editorThongTin' );
+	</script>
