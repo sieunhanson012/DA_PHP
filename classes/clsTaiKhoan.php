@@ -30,16 +30,16 @@ class clsTaiKhoan {
 		}
 	}
 
-	public function Xoa() {
-		$Query("UPDATE taikhoan SET trang_thai = 0 WHERE ma_tai_khoan = $_MaTK");
-		//Kiểm tra số dòng bị ảnh hưởng trong database
-		//Trả về true nếu tồn tại
-		if ($EffectRow() > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+//	public function Xoa() {
+//		$Query("UPDATE taikhoan SET trang_thai = 0 WHERE ma_tai_khoan = $_MaTK");
+//		//Kiểm tra số dòng bị ảnh hưởng trong database
+//		//Trả về true nếu tồn tại
+//		if ($EffectRow() > 0) {
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
 
 	public static function Sua($_MaTK, $_HoTen, $_MatKhau, $_SoDienThoai, $_Quyen) {
 		clsDataBase::Query("UPDATE taikhoan SET ho_ten = '$_HoTen', mat_khau = '$_MatKhau', so_dien_thoai = '$_SoDienThoai', quyen = '$_Quyen' WHERE ma_tai_khoan = '$_MaTK' ");
@@ -52,24 +52,24 @@ class clsTaiKhoan {
 		}
 	}
 
-	public function dangNhap() {
-		$Query("SELECT ma_tai_khoan,ho_ten,ten_dang_nhap,mat_khau,quyen,tinh_trang FROM taikhoan WHERE ten_dang_nhap = '$_TenDangNhap'") AND trang_thai == 1;
+	public function dangNhap($_TenDangNhap,$_MatKhau) {
+		clsDataBase::query("SELECT ma_tai_khoan,ho_ten,ten_dang_nhap,mat_khau,quyen,trang_thai FROM taikhoan WHERE ten_dang_nhap = '$_TenDangNhap' AND trang_thai = 1");
 		//Kiểm tra có tồn tại tài khoản không?
-		if ($NumRows() > 0) {
-			$data = $Fetch();
+		if (clsDataBase::numRows() > 0) {
+			$data = clsDataBase::fetch();
 			//Lấy mật khẩu để kiểm tra với mật khẩu nhập vào
 			if ($_MatKhau == $data["mat_khau"]) {
 				//Kiểm tra tài khoản có bị khóa không
-				if ($data["tinh_trang"] == 1) {
+				if ($data["trang_thai"] == 1) {
 					//Đăng nhập thành công
 					$_SESSION["ten_dang_nhap"] = $data["ten_dang_nhap"];
 					$_SESSION["quyen"] = $data["quyen"];
 					$_SESSION["ho_ten"] = $data["ho_ten"];
 					$MaTK = $data["ma_tai_khoan"];
-					$NgayHienTai = date();
+					$NgayHienTai = date('Y-m-d');
 					//Cập nhật lần đăng nhập cuối của tài khoản
-					$Query("UPDATE FROM taikhoan SET ngay_tao = '$NgayHienTai' WHERE ma_tai_khoan = $MaTK ");
-					if ($EffectRow() > 0) {
+					clsDataBase::query("UPDATE taikhoan SET lan_dang_nhap_cuoi = '$NgayHienTai' WHERE ma_tai_khoan = $MaTKUPDATE FROM taikhoan SET lan_dang_nhap_cuoi = '$NgayHienTai' WHERE ma_tai_khoan = $MaTK");
+					if (clsDatabase::effectRow() > 0) {
 						return true;
 					} else {
 						return false;

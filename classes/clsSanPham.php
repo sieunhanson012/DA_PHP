@@ -46,4 +46,17 @@ class clsSanPham {
 			return false;
 		}
 	}
+
+	/**
+	 * Thêm sản phẩm
+	 * Thành công ==> true
+	 */
+	public static function them($maMau,$maLoai,$maKichCo,$maHSX,$tenSP,$giaBan,$chatLieu,$hinhAnh,$thongTin,$ngayTao,$soLuong){
+		clsDataBase::query("INSERT INTO sanpham(ma_mau, ma_loai, ma_kich_co, ma_hang_sx, ten_san_pham, gia_ban, chat_lieu, hinh_anh, thong_tin, ngay_tao, so_luong)
+										VALUES('$maMau','$maLoai','$maKichCo','$maHSX','$tenSP','$giaBan','$chatLieu','$hinhAnh','$thongTin','$ngayTao','$soLuong')");
+		if(clsDataBase::effectRow()>0){
+			return true;
+		}
+		return false;				
+	}
 }

@@ -54,6 +54,18 @@ class clsDataBase
         }
     }
 
+    /**
+     * Lấy id vừa insert
+     */
+     public static function lastID(){
+        if(self::$conn){
+            $number = mysqli_insert_id(self::$conn);
+            return $number;
+        }else{
+            return "Connection failed";
+        }
+     }
+
     /*
         Lấy 1 dòng dữ liệu của câu truy vấn SELECT
         Không có dữ liệu trả về null
