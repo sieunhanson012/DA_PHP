@@ -4,7 +4,8 @@ if (isset($_SESSION["notify"])) {
     unset($_SESSION["notify"]);
 }
 
-// lấy dữ liệu
+
+// lÃ¢Ì�y dÆ°Ìƒ liÃªÌ£u
 clsDataBase::openConnect();
 $dataMauSac = clsMauSac::layMauSac();
 $dataKichCo = clsKichCo::layKichCo();
@@ -33,51 +34,56 @@ clsDataBase::closeConnect();
             Thêm sản phẩm
         </div>
         <div class="panel-body">
-            <form action="handle_php/h_add_product.php" id="frmThemHSX" method="POST" enctype="multipart/form-data">
+            <form action="handle_php/h_add_product.php" id="frmThemSP" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="tenSP">Tên sản phẩm</label>
                     <input type="text" class="form-control" id="tenSP" name="txtTenSP"
-                           placeholder="nhập tên hãng sản xuất" value="" required>
+                           placeholder="Nhập tên sản phẩm" value="" required>
                 </div>
                 <div class="form-group">
                     <label for="hinhAnh">Hình ảnh</label>
+                    <img src="" alt="">
                     <div class="input-group image-preview">
                         <input id="hinhAnh" type="text" class="form-control image-preview-filename" name="txtHinhAnh"
                                disabled="disabled" required> <!-- don't give a name === doesn't send on POST/GET -->
                         <span class="input-group-btn">
 							<!-- image-preview-clear button -->
 							<button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-							<span class="glyphicon glyphicon-remove"></span> Clear
+							<span class="glyphicon glyphicon-remove"></span> Hủy
 							</button>
                             <!-- image-preview-input -->
 							<div class="btn btn-default image-preview-input">
 								<span class="glyphicon glyphicon-folder-open"></span>
-								<span class="image-preview-input-title">Browse</span>
+								<span class="image-preview-input-title">Chọn hình</span>
 								<input type="file" accept="image/png, image/jpeg, image/gif" name="txtImage" required/>
                                 <!-- rename it -->
 							</div>
+							
 						</span>
                     </div><!-- /input-group image-preview [TO HERE]-->
                 </div>
                 <div class="form-group">
                     <label for="giaBan">Giá bán</label>
-                    <input type="text" class="form-control" id="giaBan" name="txtGiaBan" placeholder="nhập giá bán"
+                    <input type="number" class="form-control" id="giaBan" name="txtGiaBan" placeholder="Nhập giá bán"
                            value="" required>
                 </div>
                 <div class="form-group">
                     <label for="chatLieu">Chất liệu</label>
                     <input type="text" class="form-control" id="chatLieu" name="txtChatLieu"
-                           placeholder="nhập chất liệu" value="" required>
+                           placeholder="Nhập chất liệu" value="" required>
                 </div>
                 <div class="form-group">
-                    <label for="thongTin">Thông tin</label>
+                    <label for="thongTin">Thông tin sản phẩm</label>
                     <textarea name="txtThongTin" id="thongTin" class="form-control" rows="3"
                               required="required"></textarea>
+                    <script>
+                        CKEDITOR.replace('thongTin');
+                    </script>
                 </div>
                 <div class="form-group">
                     <label for="soLuong">Số lượng</label>
-                    <input type="text" class="form-control" id="soLuong" name="txtSoLuong"
-                           placeholder="nhập số lượng" value="" required>
+                    <input type="number" class="form-control" id="soLuong" name="txtSoLuong"
+                           placeholder="Nhập số lượng" value="" required>
                 </div>
                 <div class="form-group">
                     <div class="row">
@@ -97,7 +103,7 @@ clsDataBase::closeConnect();
                                 </label>
                             </div>
                             <input type="text" class="form-control" id="txtMauMoi" name="txtMauMoi"
-                                   placeholder="nhập màu sắc" value="">
+                                   placeholder="Nhập màu mới" value="">
                         </div>
                         <div class="col-sm-6">
                             <label for="">Kích cỡ</label><br>
@@ -110,11 +116,11 @@ clsDataBase::closeConnect();
                                 <label style="padding-left: 0px;">
                                     <input type="checkbox" id="chkKichThuocMoi" name="chkKichThuocMoi">
                                     <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                    Kích cỡ mới
+                                   Kích cỡ mới
                                 </label>
                             </div>
                             <input type="text" class="form-control" id="txtKichCoMoi" name="txtKichCoMoi"
-                                   placeholder="nhập kích cỡ" value="">
+                                   placeholder="Nhập kích cỡ mới" value="">
                         </div>
                     </div>
                 </div>
@@ -129,7 +135,7 @@ clsDataBase::closeConnect();
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="">Hãng sản xuất</label><br>
+                            <label for="">Hãng sản xuất</label></label><br>
                             <select class="form-control" id="sltHSX" name="sltHSX">
                                 <?php foreach ($dataHSX as $rows): ?>
                                     <option value="<?= $rows["ma_hang_sx"] ?>"><?= $rows["ten_hang_sx"] ?></option>
@@ -139,37 +145,36 @@ clsDataBase::closeConnect();
                         </div>
                     </div>
                 </div>
-                <a class="btn btn-default" href="index.php?page=hang-san-xuat"><i class="fa fa-arrow-left"></i> Quay
-                    lại</a>
-                <button class="btn btn-primary"><i class="fa fa-save"></i> Lưu hãng sản xuất</button>
+                <a class="btn btn-default" href="index.php?page=san-pham"><i class="fa fa-arrow-left"></i> Quay
+                    Lại</a>
+                <button class="btn btn-primary"><i class="fa fa-save"></i> Lưu sản phẩm</button>
             </form>
         </div>
     </div>
     <div class="result"></div>
 </div>
 <script>
-    // ẩn input thêm màu mới
+
+</script>
+<script>
+    // Ã¢Ì‰n input thÃªm maÌ€u mÆ¡Ì�i
     $("#txtMauMoi").toggle(false);
-    //click vào checkbox để hiện input
+    //click vaÌ€o checkbox Ä‘ÃªÌ‰ hiÃªÌ£n input
     $("#ckbMauMoi").click(function () {
-        //hiện input
+        //hiÃªÌ£n input
         $("#txtMauMoi").toggle("slow", "swing", this.checked)
-        //ẩn select
+        //Ã¢Ì‰n select
         $("#sltMauSac").toggle("slow", "swing", !this.checked)
     });
 
-    // ẩn input thêm kích thước mới
+    // Ã¢Ì‰n input thÃªm kiÌ�ch thÆ°Æ¡Ì�c mÆ¡Ì�i
     $("#txtKichCoMoi").toggle(false);
-    //click vào checkbox để hiện input
+    //click vaÌ€o checkbox Ä‘ÃªÌ‰ hiÃªÌ£n input
     $("#chkKichThuocMoi").click(function () {
-        //hiện input
+        //hiÃªÌ£n input
         $("#txtKichCoMoi").toggle("slow", "swing", this.checked)
-        //ẩn select
+        //Ã¢Ì‰n select
         $("#sltKichCo").toggle("slow", "swing", !this.checked)
     });
 </script>
-<script>
-    CKEDITOR.replace('editorThongTin');
 
-
-</script>

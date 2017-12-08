@@ -25,11 +25,11 @@ if (isset($_REQUEST["ac"])) {
     } elseif ($_REQUEST["ac"] == "visible") {
         //Hiện sản phẩm
         if (clsSanPham::trangThai($maSP, true)) {
-            helper::alertSuccessString("Đã hiện sản phẩm $tenSP");
+            helper::alertSuccessString("Đã hiện sản phẩm <strong>$tenSP</strong>");
         }
     } elseif ($_REQUEST["ac"] == "invisible") {
         if (clsSanPham::trangThai($maSP, false)) {
-            helper::alertDangerString("Đã ẩn sản phẩm $tenSP");
+            helper::alertDangerString("Đã ẩn sản phẩm <strong>$tenSP</strong>");
         }
     }
 }

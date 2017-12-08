@@ -50,7 +50,7 @@ if (!empty($kiemTraMauMoi) && empty($kiemtraKichCoMoi)) { //Kiểm tra màu m�
     //Thêm sản phẩm
     $temp = clsSanPham::them($resultMauMoi, $loaiSanPham, $kichCoCu, $hangSanXuat, $tenSP, $giaBan, $chatLieu, $resultHinhAnh, $thongTin, $ngayHienTai, $soLuong);
     if ($temp) {
-        $_SESSION["notify"] = "Thêm sản phẩm $tenSP thành công";
+        $_SESSION["notify"] = "Thêm sản phẩm <strong>$tenSP</strong> thành công";
         header("Location: ../index.php?page=san-pham");
     }
 
@@ -73,7 +73,7 @@ if (!empty($kiemTraMauMoi) && empty($kiemtraKichCoMoi)) { //Kiểm tra màu m�
     //Thêm sản phẩm
     $temp = clsSanPham::them($mauSacCu, $loaiSanPham, $resulutKichCo, $hangSanXuat, $tenSP, $giaBan, $chatLieu, $resultHinhAnh, $thongTin, $ngayHienTai, $soLuong);
     if ($temp) {
-        $_SESSION["notify"] = "Thêm sản phẩm $tenSP thành công";
+        $_SESSION["notify"] = "Thêm sản phẩm <strong>$tenSP</strong> thành công";
         header("Location: ../index.php?page=san-pham");
     }
 } elseif (!empty($kiemtraKichCoMoi) && !empty($kiemTraMauMoi)) {//Kiểm tra màu và kích cỡ mới
@@ -102,7 +102,7 @@ if (!empty($kiemTraMauMoi) && empty($kiemtraKichCoMoi)) { //Kiểm tra màu m�
     //Thêm sản phẩm
     $temp = clsSanPham::them($resultMauSac, $loaiSanPham, $resultKichCo, $hangSanXuat, $tenSP, $giaBan, $chatLieu, $resultHinhAnh, $thongTin, $ngayHienTai, $soLuong);
     if ($temp) {
-        $_SESSION["notify"] = "Thêm sản phẩm $tenSP thành công";
+        $_SESSION["notify"] = "Thêm sản phẩm <strong>$tenSP</strong> thành công";
         header("Location: ../index.php?page=san-pham");
     }
 } else { // màu cũ kích cỡ cũ
@@ -116,7 +116,7 @@ if (!empty($kiemTraMauMoi) && empty($kiemtraKichCoMoi)) { //Kiểm tra màu m�
     //thêm sản phẩm
     $temp = clsSanPham::them($mauSacCu, $loaiSanPham, $kichCoCu, $hangSanXuat, $tenSP, $giaBan, $chatLieu, $resultHinhAnh, $thongTin, $ngayHienTai, $soLuong);
     if ($temp) {
-        $_SESSION["notify"] = "Thêm sản phẩm $tenSP thành công";
+        $_SESSION["notify"] = "Thêm sản phẩm <strong>$tenSP</strong> thành công";
         header("Location: ../index.php?page=san-pham");
     }
 }

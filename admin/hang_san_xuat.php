@@ -1,5 +1,9 @@
 <?php
-
+//thông báo thành công
+if (isset($_SESSION["notify"])) {
+	helper::onloadAlertSuccess($_SESSION["notify"]);
+	unset($_SESSION["notify"]);
+}
 clsDataBase::openConnect();
 $data = clsHangSanXuat::layHangSanXuat();
 clsDataBase::closeConnect();

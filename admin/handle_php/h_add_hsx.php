@@ -8,10 +8,11 @@ $_tenHSX = $_POST["txtTenHSX"];
 $_ghiChu = $_POST["txtGhiChu"];
 
 clsDataBase::openConnect();
-$temp = clsHangSanXuat::Them($_tenHSX, $_ghiChu, 1);
+$temp = clsHangSanXuat::them($_tenHSX, $_ghiChu, 1);
 
 if (is_bool($temp) && $temp == true) {
     //thành công quay lại trang hãng sản xuất
+    $_SESSION["notify"] = "Thêm hãng <strong>$_tenHSX</strong> thành công";
     header("Location: ../index.php?page=hang-san-xuat");
 } else {
     //tồn tại hãng sản xuất

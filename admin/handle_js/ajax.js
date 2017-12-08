@@ -2,7 +2,6 @@
 	/*
 		Khóa tài khoản trang tai_khoan
 	*/
-
 	function trangThaiTaiKhoan(id){
 		name=document.getElementById("ckbTrangThaiTK"+id).value;
 	    if (document.getElementById("ckbTrangThaiTK"+id).checked==true) {
@@ -127,7 +126,6 @@
 		Trạng thái hsx 
 		lấy qua từng id của input + id của hãng sx
 	*/
-	
 	function trangThaiHSX(id,name){
             if (document.getElementById("ckbTrangThaiHSX"+id).checked==true) {
                 $.post(
@@ -186,3 +184,94 @@
 	    });
 	});
 	
+	/*
+		Trạng thái loai 
+		lấy qua từng id của input + id của loai
+	*/
+	function trangThaiLoaiSP(id){
+		name = document.getElementById("chkTrangThaiLoai"+id).value;
+		if (document.getElementById("chkTrangThaiLoai"+id).checked==true) {
+			$.post(
+				"handle_php/h_status_loai.php", {
+					ma_loai: id,
+					ten_loai:name,
+					ac: "visible"
+				},
+				function(data) {
+					$(".result").html(data);
+				});
+		} else {
+			$.post(
+				"handle_php/h_status_loai.php", {
+					ma_loai: id,
+					ten_loai:name,
+					ac: "invisible"
+				},
+				function(data) {
+					$(".result").html(data);
+				});
+		}
+	}
+
+	/**
+	 * Sửa loại sản phẩm
+	 */
+	
+	
+	$('#submit-edit-loai').click(function(e) {
+	    $.confirm({
+	        icon: 'glyphicon glyphicon-edit',
+	        title: 'Thông báo',
+	        content: 'Bạn có muốn lưu không?',
+	        type: 'green',
+	        typeAnimated: true,
+	        buttons: {
+	            Yes: {
+	                text: 'Đồng ý',
+	                btnClass: 'btn-success',
+	                action: function() {
+	                    $.post("handle_php/h_edit_loai.php", {
+	                            maLoai: $('#maLoai').val(),
+	                            tenLoai: $('#tenLoai').val(),
+	                        },
+	                        function(data) {
+	                            $(".result").html(data);
+	                        });
+	                }
+	            },
+	            Close: {
+	                text: "Quay lại",
+	                close: function() {}
+	            }
+	        }
+	    });
+	});
+
+
+	
+	/*
+		Trạng thái QC 
+		lấy qua từng id của input + id của loai
+	*/
+	function trangThaiQC(id){
+		
+		if (document.getElementById("chkTrangThaiQC"+id).checked==true) {
+			$.post(
+				"handle_php/h_status_qc.php", {
+					maQC: id,
+					ac: "visible"
+				},
+				function(data) {
+					$(".result").html(data);
+				});
+		} else {
+			$.post(
+				"handle_php/h_status_qc.php", {
+					maQC: id,
+					ac: "invisible"
+				},
+				function(data) {
+					$(".result").html(data);
+				});
+		}
+	}

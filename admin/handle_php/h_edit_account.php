@@ -16,8 +16,8 @@ if (!empty($_POST["maTK"])) {
 
 clsDataBase::openConnect();
 if (clsTaiKhoan::Sua($_MaTK, $_HoTen, $_MatKhau, $_SoDienThoai, $_Quyen)) {
-    helper::alertSuccessString("Sửa tài khoản $_TenTK thành công");
+    helper::alertSuccessString("Sửa tài khoản <strong>$_TenTK</strong>  thành công");
 } else {
-    helper::alertDangerString("Sửa tài khoản $_TenTK thất bại");
+    helper::alertDangerString("Sửa tài khoản <strong>$_TenTK</strong> thất bại");
 }
 clsDataBase::closeConnect();

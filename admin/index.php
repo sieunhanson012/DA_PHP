@@ -22,6 +22,16 @@ if (isset($_GET['page'])) {
 		break;
 	case "them-hang-sx":include_once "them_hang_sx.php";
 		break;
+	case "loai-san-pham":include_once "loai_san_pham.php";
+		break;
+	case "sua-loai-san-pham":include_once "sua_loai_sp.php";
+		break;
+	case "quang-cao":include_once "quang_cao.php";
+		break;
+	case "them-quang-cao": include_once "them_quang_cao.php";
+		break;
+	case "sua-quang-cao": include_once "sua_quang_cao.php";
+		break;
 	default:include_once "home.php";
 	}
 } else {

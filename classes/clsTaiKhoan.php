@@ -52,7 +52,7 @@ class clsTaiKhoan {
 	}
 
 	public function dangNhap($_TenDangNhap,$_MatKhau) {
-		clsDataBase::query("SELECT ma_tai_khoan,ho_ten,ten_dang_nhap,mat_khau,quyen,trang_thai FROM taikhoan WHERE ten_dang_nhap = '$_TenDangNhap' AND trang_thai = 1");
+		clsDataBase::query("SELECT ma_tai_khoan,ho_ten,ten_dang_nhap,mat_khau,quyen,trang_thai FROM taikhoan WHERE ten_dang_nhap = '$_TenDangNhap'");
 		//Kiểm tra có tồn tại tài khoản không?
 		if (clsDataBase::numRows() > 0) {
 			$data = clsDataBase::fetch();

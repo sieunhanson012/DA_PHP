@@ -48,13 +48,17 @@ class clsHangSanXuat {
 	}
 
 	public static function Sua($_maHSX, $_tenHang, $_ghiChu) {
-		clsDataBase::query("UPDATE hangsanxuat SET ten_hang_sx = '$_tenHang', ghi_chu = '$_ghiChu' WHERE ma_hang_sx = '$_maHSX' ");
-		//Kiểm tra số dòng bị ảnh hưởng trong database
-		//Trả về true nếu tồn tại
-		if (clsDataBase::effectRow() > 0) {
-			return true;
+
+		clsDataBase::query("SELECT ten_hang_sx FROM hangsanxuat WHERE ten_hang_sx = '$_tenHang' ");
+		if(clsDataBase::numRows()<=0){
+			clsDataBase::query("UPDATE hangsanxuat SET ten_hang_sx = '$_tenHang', ghi_chu = '$_ghiChu' WHERE ma_hang_sx = '$_maHSX' ");
+			//Kiểm tra số dòng bị ảnh hưởng trong database
+			//Trả về true nếu tồn tại
+			if (clsDataBase::effectRow() > 0) {
+				return true;
+			}
 		}
-		return false;
+			return false;
 	}
 
 	/*
@@ -62,7 +66,7 @@ class clsHangSanXuat {
 		Đúng ==> trả về true
 		Tồn tại ==> trả về false
 	*/
-	public static function Them($_tenHang, $_ghiChu, $_trangThai) {
+	public static function them($_tenHang, $_ghiChu, $_trangThai) {
 		clsDataBase::query("SELECT ten_hang_sx FROM hangsanxuat WHERE ten_hang_sx = '$_tenHang'");
 		if (clsDataBase::numRows() > 0) {
 			return false;

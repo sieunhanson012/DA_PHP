@@ -15,12 +15,12 @@ if (isset($_REQUEST["ac"])) {
     if ($_REQUEST["ac"] == "visible") {
         //Hiện hãng sản xuất
         if (clsHangSanXuat::trangThai($maHSX, true)) {
-            helper::alertSuccessString("Đã hiện hãng sản xuất $tenHSX");
+            helper::alertSuccessString("Đã hiện hãng sản xuất <strong>$tenHSX</strong>");
         }
     } elseif ($_REQUEST["ac"] == "invisible") {
         //Ẩn hãng sản xuất
         if (clsHangSanXuat::trangThai($maHSX, false)) {
-            helper::alertDangerString("Đã ẩn hãng sản xuất $tenHSX");
+            helper::alertDangerString("Đã ẩn hãng sản xuất <strong>$tenHSX</strong>");
         }
     }
 }

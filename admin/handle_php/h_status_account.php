@@ -13,14 +13,14 @@ if (isset($_REQUEST["ac"])) {
     if ($_REQUEST["ac"] == "lock") {
         //Khóa tài khoản
         if (clsTaiKhoan::khoaTaiKhoan($maTK)) {
-            helper::alertDangerString("Khóa tài khoản $tenTK thành công ");
+            helper::alertDangerString("Khóa tài khoản <strong>$tenTK</strong> thành công ");
         } else {
             helper::alertDangerString("Thất bại vui lòng thử lại!");
         }
     } elseif ($_REQUEST["ac"] == "unlock") {
         //Mở khóa tài khoản
         if (clsTaiKhoan::moKhoaTaiKhoan($maTK)) {
-            helper::alertSuccessString("Mở khóa tài $tenTK khoản thành công");
+            helper::alertSuccessString("Mở khóa tài <strong>$tenTK</strong> khoản thành công");
         } else {
             helper::alertDangerString("Thất bại vui lòng thử lại!");
         }

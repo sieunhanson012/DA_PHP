@@ -13,8 +13,8 @@ $_ghiChu = $_POST["ghiChu"];
 
 clsDataBase::openConnect();
 if (clsHangSanXuat::Sua($_maHSX, $_tenHSX, $_ghiChu)) {
-    helper::alertSuccess("Sửa hãng sản xuất");
+    helper::alertSuccessString("Sửa hãng sản xuất <strong>$_tenHSX</strong> thành công");
 } else {
-    helper::alertDangerString("Sửa hãng sản xuất thất bại");
+    helper::alertDangerString("Hãng sản xuất <strong>$_tenHSX</strong> đã tồn tại");
 }
 clsDataBase::closeConnect();

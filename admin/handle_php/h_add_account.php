@@ -15,6 +15,7 @@ clsDataBase::openConnect();
 $temp = clsTaiKhoan::Them($_HoTen, $_TenDangNhap, $_MatKhau, $_Email, $_SoDienThoai, date('Y-m-d'), date('Y-m-d'), 1, $_Quyen);
 if (is_bool($temp)) {
 	//thành công quay lại trang bảng tài khoản
+	$_SESSION["notify"] = "Thêm tài khoản <strong>$_TenDangNhap</strong> thành công";
 	header("Location: ../index.php?page=tai-khoan");
 } elseif ($temp == "username") {
 	//tồn tại tên đăng nhập

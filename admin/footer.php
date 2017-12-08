@@ -15,7 +15,6 @@
     <!-- Handle js -->
     <script type="text/javascript" src="handle_js/ajax.js"></script>
     <script type="text/javascript" src="handle_js/validation.js"></script>
-
 </body>
 
 </html>
