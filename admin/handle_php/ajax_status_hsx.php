@@ -14,13 +14,19 @@ clsDataBase::openConnect();
 if (isset($_REQUEST["ac"])) {
     if ($_REQUEST["ac"] == "visible") {
         //Hiện hãng sản xuất
-        if (clsHangSanXuat::trangThai($maHSX, true)) {
+        $resultTrangThai = clsHangSanXuat::trangThai($maHSX, true);
+        if (is_bool($resultTrangThai)) {
             helper::alertSuccessString("Đã hiện hãng sản xuất <strong>$tenHSX</strong>");
+        }else{
+            helper::alertDangerString($resultTrangThai);
         }
     } elseif ($_REQUEST["ac"] == "invisible") {
         //Ẩn hãng sản xuất
-        if (clsHangSanXuat::trangThai($maHSX, false)) {
+        $resultTrangThai = clsHangSanXuat::trangThai($maHSX, false);
+        if (is_bool($resultTrangThai)) {
             helper::alertDangerString("Đã ẩn hãng sản xuất <strong>$tenHSX</strong>");
+        }else{
+            helper::alertDangerString($resultTrangThai);
         }
     }
 }

@@ -1,0 +1,6 @@
+
+RewriteEngine On
+RewriteRule "index.html" "index.php"
+RewriteRule "^(.*).html$" "index.php?page=$1"
+
+

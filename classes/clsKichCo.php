@@ -7,7 +7,7 @@ class clsKichCo {
 		if (clsDataBase::numRows() > 0) {
 			return clsDataBase::fetchAll();
 		}
-		return false;
+		return str_replace("'","",clsDataBase::getError());
 	}
 
 	/**
@@ -18,13 +18,13 @@ class clsKichCo {
 	public static function them($kichCo){
 		clsDataBase::query("SELECT kich_co FROM kichco WHERE kich_co = '$kichCo'");
 		if(clsDataBase::numRows()>0){
-			return false;
+			return str_replace("'","",clsDataBase::getError());
 		}else{
 			clsDataBase::query("INSERT INTO kichco(kich_co) VALUES('$kichCo')");
 			if (clsDataBase::effectRow() > 0) {
 				return clsDataBase::lastID();
 			}
-			return false;
 		}
+		return str_replace("'","",clsDataBase::getError());
 	}
 }

@@ -13,13 +13,19 @@ clsDataBase::openConnect();
 if (isset($_REQUEST["ac"])) {
     if ($_REQUEST["ac"] == "visible") {
         //Hiện loại
-        if (clsQuangCao::trangThai($maQC, true)) {
+        $resultQC = clsQuangCao::trangThai($maQC, true);
+        if (is_bool($resultQC)) {
             helper::alertSuccessString("Đã hiện quảng cáo");
+        }else{
+            helper::alertDangerString($resultSanPham);
         }
     } elseif ($_REQUEST["ac"] == "invisible") {
         //Ẩn loại
-        if (clsQuangCao::trangThai($maQC, false)) {
+        $resultQC = clsQuangCao::trangThai($maQC, false);
+        if (is_bool($resultQC)) {
             helper::alertDangerString("Đã ẩn quảng cáo");
+        }else{
+            helper::alertDangerString($resultSanPham);
         }
     }
 }

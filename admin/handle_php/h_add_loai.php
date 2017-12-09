@@ -9,11 +9,14 @@ clsDataBase::openConnect();
 $temp = clsLoaiSanPham::them($tenLoai);
 
 if (is_bool($temp) && $temp == true) {
-    //tồn tại hãng sản xuất
+    $_SESSION["focus"] = $tenLoai;
     $_SESSION["notify-success"] = "Thêm <strong>$tenLoai</strong> thành công";
-} else {
-    //tồn tại hãng sản xuất
+} elseif(!$temp) {
+    //tồn tại loaị
     $_SESSION["notify-fail"] = "Tên loại đã tồn tài";
+}else{
+    //loi truy van
+    $_SESSION["notify-fail"] = $temp;
 }
 header("Location: ../index.php?page=loai-san-pham");
 clsDataBase::closeConnect();

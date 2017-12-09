@@ -1,10 +1,4 @@
 <?php
-if (isset($_SESSION["notify"])) {
-    helper::onloadAlertDanger($_SESSION["notify"]);
-    unset($_SESSION["notify"]);
-}
-
-
 // lÃ¢Ì�y dÆ°Ìƒ liÃªÌ£u
 clsDataBase::openConnect();
 $dataMauSac = clsMauSac::layMauSac();
@@ -15,18 +9,16 @@ clsDataBase::closeConnect();
 ?>
 <div class="header">
     <h1 class="page-header">
-        Tables Page
-        <small>Responsive tables</small>
+    Thêm sản phẩm
     </h1>
     <ol class="breadcrumb">
-        <li>
-            <a href="#">Home</a>
-        </li>
-        <li>
-            <a href="#">Tables</a>
-        </li>
-        <li class="active">Data</li>
-    </ol>
+    <li>
+        <a href="index.html">Trang chủ</a>
+    </li>
+    <li>
+        <a href="#">Tables</a>
+    </li>
+    <li class="active">sản phẩm</li>
 </div>
 <div id="page-inner">
     <div class="panel panel-default">
@@ -116,7 +108,7 @@ clsDataBase::closeConnect();
                                 <label style="padding-left: 0px;">
                                     <input type="checkbox" id="chkKichThuocMoi" name="chkKichThuocMoi">
                                     <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                   Kích cỡ mới
+                                    Kích cỡ mới
                                 </label>
                             </div>
                             <input type="text" class="form-control" id="txtKichCoMoi" name="txtKichCoMoi"
@@ -153,9 +145,6 @@ clsDataBase::closeConnect();
     </div>
     <div class="result"></div>
 </div>
-<script>
-
-</script>
 <script>
     // Ã¢Ì‰n input thÃªm maÌ€u mÆ¡Ì�i
     $("#txtMauMoi").toggle(false);

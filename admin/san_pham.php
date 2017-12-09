@@ -2,23 +2,19 @@
 clsDataBase::openConnect();
 $data = clsSanPham::layBangSangPham();
 clsDataBase::closeConnect();
-if (isset($_SESSION["notify"])) {
-    helper::onloadAlertSuccess($_SESSION["notify"]);
-    unset($_SESSION["notify"]);
-}
 ?>
 <div class="header">
     <h1 class="page-header">
-        Sản phẩm
+        Bảng sản phẩm
     </h1>
     <ol class="breadcrumb">
         <li>
-            <a href="#">Home</a>
+            <a href="index.php">Trang chủ</a>
         </li>
         <li>
-            <a href="#">Tables</a>
+            <a href="#">Bảng dữ liệu</a>
         </li>
-        <li class="active">Data</li>
+        <li class="active">Sản phẩm</li>
     </ol>
 </div>
 <div id="page-inner">
@@ -28,7 +24,7 @@ if (isset($_SESSION["notify"])) {
         </div>
         <div class="panel-body">
             <div class="table-responsive">
-                <table class="table table-hover" style="text-align:center">
+                <table class="table table-hover" id="tableSanPham" style="text-align:center">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -46,7 +42,10 @@ if (isset($_SESSION["notify"])) {
                     </thead>
                     <tbody>
                     <?php foreach ($data as $keys => $rows): ?>
-                        <tr>
+                        <tr
+                        <?= ($rows["trang_thai"] == 0) ? 'class="danger"' : ''; ?>
+                            <?= ($rows["ten_san_pham"] == $focus) ? 'class="success"' : ""; ?>
+                        >
                             <td><?= $keys; ?></td>
                             <td><?= $rows["ten_san_pham"] ?></td>
                             <td><img src="../images/<?= $rows["hinh_anh"] ?>" alt="" width="150px" height="150px"></td>

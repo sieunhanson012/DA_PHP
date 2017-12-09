@@ -10,13 +10,17 @@ $_ghiChu = $_POST["txtGhiChu"];
 clsDataBase::openConnect();
 $temp = clsHangSanXuat::them($_tenHSX, $_ghiChu, 1);
 
-if (is_bool($temp) && $temp == true) {
+if (is_bool($temp) && $temp ) {
     //thành công quay lại trang hãng sản xuất
-    $_SESSION["notify"] = "Thêm hãng <strong>$_tenHSX</strong> thành công";
-    header("Location: ../index.php?page=hang-san-xuat");
-} else {
+    $_SESSION["notify-success"] = "Thêm hãng <strong>$_tenHSX</strong> thành công";
+    $_SESSION["focus"] = $_tenHSX;
+} elseif(!$temp) {
     //tồn tại hãng sản xuất
-    $_SESSION["notify"] = "Tên hãng đã tồn tài";
-    header("Location: ../index.php?page=them-hang-sx");
+    $_SESSION["notify-fail"] = "Tên hãng đã tồn tài";
+}else{
+    //lỗi truy vấn
+    $_SESSION["notify-fail"] = $temp;
+    
 }
+header("Location: ../index.php?page=them-hang-sx");
 clsDataBase::closeConnect();

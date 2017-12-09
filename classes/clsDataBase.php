@@ -55,6 +55,17 @@ class clsDataBase
     }
 
     /**
+     * Lấy lỗi câu truy vấn
+     */
+    public static function getError(){
+        if(self::$conn){
+            return mysqli_error(self::$conn);
+        }else{
+            return "Connection failed";
+        }
+    }
+
+    /**
      * Lấy id vừa insert
      */
      public static function lastID(){

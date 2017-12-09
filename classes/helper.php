@@ -7,7 +7,7 @@ class helper {
             $.notify({
                 icon: 'glyphicon glyphicon-ok',
                 title : '<strong>Thông báo: </strong>',
-                message: '" . $stringNotify . "'
+                message: ' $stringNotify '
             });
                 </script>";
 	}
@@ -17,7 +17,7 @@ class helper {
             $.notify({
                 icon: 'glyphicon glyphicon-ok',
                 title : '<strong>Thông báo: </strong>',
-                message: '" . $stringNotify . "'
+                message: ' $stringNotify '
             },{
                 type:'success'
             });
@@ -29,7 +29,7 @@ class helper {
             $.notify({
                 icon: 'glyphicon glyphicon-remove',
                 title: '<strong>Thông báo: </strong>',
-                message:'" . $stringNotify . "'
+                message:' $stringNotify '
             },{
                 type: 'danger'
             });
@@ -42,7 +42,7 @@ class helper {
             $.notify({
                 icon: 'glyphicon glyphicon-remove',
                 title: '<strong>Thông báo: </strong>',
-                message:'" . $stringNotify . "'
+                message:' $stringNotify '
             },{
                 type: 'danger'
             });
@@ -56,7 +56,7 @@ class helper {
             $.notify({
                 icon: 'glyphicon glyphicon-remove',
                 title: '<strong>Thông báo: </strong>',
-                message:'" . $stringNotify . "'
+                message:' $stringNotify '
             },{
                 type: 'success'
             });

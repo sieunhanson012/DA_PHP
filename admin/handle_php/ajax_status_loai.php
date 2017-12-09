@@ -14,13 +14,19 @@ clsDataBase::openConnect();
 if (isset($_REQUEST["ac"])) {
     if ($_REQUEST["ac"] == "visible") {
         //Hiện loại
-        if (clsLoaiSanPham::trangThai($maLoai, true)) {
+        $resultLoaiSP = clsLoaiSanPham::trangThai($maLoai, true);
+        if (is_bool($resultLoaiSP)) {
             helper::alertSuccessString("Đã hiện <strong>$tenLoai</strong>");
+        }else{
+            helper::alertDangerString($resultTrangThai);
         }
     } elseif ($_REQUEST["ac"] == "invisible") {
         //Ẩn loại
-        if (clsLoaiSanPham::trangThai($maLoai, false)) {
+        $resultLoaiSP = clsLoaiSanPham::trangThai($maLoai, false);
+        if (is_bool($resultLoaiSP)) {
             helper::alertDangerString("Đã ẩn <strong>$tenLoai</strong>");
+        }else{
+            helper::alertDangerString($resultTrangThai);
         }
     }
 }

@@ -23,7 +23,7 @@ class clsTaiKhoan {
 				if (clsDataBase::effectRow() > 0) {
 					return true;
 				} else {
-					return false;
+					return str_replace("'","",clsDataBase::getError());
 				}
 			}
 		}
@@ -36,7 +36,7 @@ class clsTaiKhoan {
 //		if ($EffectRow() > 0) {
 //			return true;
 //		} else {
-//			return false;
+//			return str_replace("'","",clsDataBase::getError());
 //		}
 //	}
 
@@ -47,7 +47,7 @@ class clsTaiKhoan {
 		if (clsDataBase::EffectRow() > 0) {
 			return true;
 		} else {
-			return false;
+			return str_replace("'","",clsDataBase::getError());
 		}
 	}
 
@@ -71,7 +71,7 @@ class clsTaiKhoan {
 					if (clsDatabase::effectRow() > 0) {
 						return true;
 					} else {
-						return false;
+						return str_replace("'","",clsDataBase::getError());
 					}
 				} else {
 					//Tài khoản bị khóa
@@ -94,7 +94,7 @@ class clsTaiKhoan {
 			unset($_SESSION["ho_ten"]);
 			return true;
 		}
-		return false;
+		return str_replace("'","",clsDataBase::getError());
 	}
 
 	public static function layBangTaiKhoan() {
@@ -102,7 +102,7 @@ class clsTaiKhoan {
 		if (clsDataBase::numRows() > 0) {
 			return clsDataBase::fetchAll();
 		} else {
-			return false;
+			return str_replace("'","",clsDataBase::getError());
 		}
 	}
 
@@ -111,7 +111,7 @@ class clsTaiKhoan {
 		if (clsDataBase::numRows() > 0) {
 			return clsDataBase::Fetch();
 		} else {
-			return false;
+			return str_replace("'","",clsDataBase::getError());
 		}
 	}
 
@@ -120,7 +120,7 @@ class clsTaiKhoan {
 		if (clsDataBase::effectRow() > 0) {
 			return true;
 		}
-		return false;
+		return str_replace("'","",clsDataBase::getError());
 	}
 
 	public static function moKhoaTaiKhoan($maTK) {
@@ -128,6 +128,6 @@ class clsTaiKhoan {
 		if (clsDataBase::effectRow() > 0) {
 			return true;
 		}
-		return false;
+		return str_replace("'","",clsDataBase::getError());
 	}
 }

@@ -7,15 +7,15 @@ class clsLoaiSanPham {
 		if (clsDataBase::numRows() > 0) {
 			return clsDataBase::fetchAll();
 		}
-		return false;
+		return str_replace("'","",clsDataBase::getError());
 	}
 
 	public static function layTatCaLoaiSanPham(){
-		clsDataBase::query("SELECT * FROM loaisanpham ");
+		clsDataBase::query("SELECT * FROM loaisanpham ORDER BY ma_loai DESC ");
 		if (clsDataBase::numRows() > 0) {
 			return clsDataBase::fetchAll();
 		}
-		return false;
+		return str_replace("'","",clsDataBase::getError());
 	}
 
 	public static function layLoaiSanPhamTheoMa($maLoai){
@@ -23,7 +23,7 @@ class clsLoaiSanPham {
 		if (clsDataBase::numRows() > 0) {
 			return clsDataBase::fetch();
 		}
-		return false;
+		return str_replace("'","",clsDataBase::getError());
 	}
 
 	public static function trangThai($maLoai, $bool) {
@@ -33,22 +33,21 @@ class clsLoaiSanPham {
 			if (clsDataBase::effectRow() > 0) {
 				return true;
 			}
-			return false;
 		} else {
 			//Ẩn hãng sản xuất
 			clsDataBase::query("UPDATE loaisanpham SET trang_thai = 0 WHERE ma_loai = '$maLoai'");
 			if (clsDataBase::effectRow() > 0) {
 				return true;
 			}
-			return false;
 		}
+		return str_replace("'","",clsDataBase::getError());
 	}
 
-	/*
-		Thêm loại
-		Đúng ==> trả về true
-		Tồn tại ==> trả về false
-	*/
+	/**
+	 * Sửa loại sản phẩm 
+	 * trùng => false
+	 * lỗi => errorString
+	 */
 	public static function them($tenLoai) {
 		clsDataBase::query("SELECT ten_loai FROM loaisanpham WHERE ten_loai = '$tenLoai'");
 		if (clsDataBase::numRows() > 0) {
@@ -58,18 +57,25 @@ class clsLoaiSanPham {
 			if (clsDataBase::effectRow() > 0) {
 				return true;
 			}
-			return false;
 		}
+		return str_replace("'","",clsDataBase::getError());
 	}
 
+	/**
+	 * Sửa loại sản phẩm 
+	 * trùng => false
+	 * lỗi => errorString
+	 */
 	public static function sua($maLoai,$tenLoai) {
 		clsDataBase::query("SELECT ten_loai FROM loaisanpham WHERE ten_loai = '$tenLoai'");
-		if (clsDataBase::numRows() <= 0) {
+		if (clsDataBase::numRows() > 0) {
+			return false;
+		}else{
 			clsDataBase::query("UPDATE loaisanpham SET ten_loai = '$tenLoai' WHERE ma_loai = '$maLoai' ");
 			if (clsDataBase::effectRow() > 0) {
 				return true;
 			}
 		}
-			return false;
+		return str_replace("'","",clsDataBase::getError());
 	}
 }

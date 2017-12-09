@@ -14,22 +14,34 @@ clsDataBase::openConnect();
 if (isset($_REQUEST["ac"])) {
     if ($_REQUEST["ac"] == "hot") {
         //sp hot
-        if (clsSanPham::tinhTrangHot($maSP, true)) {
+        $resultSanPham = clsSanPham::tinhTrangHot($maSP, true);
+        if (is_bool($resultSanPham)) {
             helper::alertPrimaryString("Cập nhật sản phẩm hot");
+        }else{
+            helper::alertDangerString($resultSanPham);
         }
     } elseif ($_REQUEST["ac"] == "normal") {
         //sp binh thuong
-        if (clsSanPham::tinhTrangHot($maSP, false)) {
+        $resultSanPham = clsSanPham::tinhTrangHot($maSP, false);
+        if (is_bool($resultSanPham)) {
             helper::alertPrimaryString("Cập nhật sản phẩm bình thường");
+        }else{
+            helper::alertDangerString($resultSanPham);
         }
     } elseif ($_REQUEST["ac"] == "visible") {
         //Hiện sản phẩm
-        if (clsSanPham::trangThai($maSP, true)) {
+        $resultSanPham = clsSanPham::trangThai($maSP, true);
+        if (is_bool($resultSanPham)) {
             helper::alertSuccessString("Đã hiện sản phẩm <strong>$tenSP</strong>");
+        }else{
+            helper::alertDangerString($resultSanPham);
         }
     } elseif ($_REQUEST["ac"] == "invisible") {
-        if (clsSanPham::trangThai($maSP, false)) {
+        $resultSanPham = clsSanPham::trangThai($maSP, false);
+        if (is_bool($resultSanPham)) {
             helper::alertDangerString("Đã ẩn sản phẩm <strong>$tenSP</strong>");
+        }else{
+            helper::alertDangerString($resultSanPham);
         }
     }
 }

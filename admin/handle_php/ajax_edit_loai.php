@@ -11,9 +11,12 @@ $maLoai = $_POST["maLoai"];
 $tenLoai = $_POST["tenLoai"];
 
 clsDataBase::openConnect();
-if (clsLoaiSanPham::sua($maLoai, $tenLoai)) {
+$resultLoaiSP =clsLoaiSanPham::sua($maLoai, $tenLoai);
+if (is_bool($resultLoaiSP)&& $resultLoaiSP) {
     helper::alertSuccessString("Sửa loại <strong>$tenLoai</strong> thành công");
-} else {
-    helper::alertDangerString("Loại <strong>$tenLoai</strong> đã tồn tại");
+} elseif(!$resultLoaiSP){
+    helper::alertDangerString("<strong>$tenLoai</strong> đã tồn tại");
+}else{
+    helper::alertDangerString($resultLoaiSP);
 }
 clsDataBase::closeConnect();

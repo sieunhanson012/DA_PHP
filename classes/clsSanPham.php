@@ -3,11 +3,11 @@
 class clsSanPham {
 
 	public static function layBangSangPham() {
-		clsDataBase::query("SELECT sanpham.*,mausac.ten_mau,kichco.kich_co,loaisanpham.ten_loai,hangsanxuat.ten_hang_sx FROM sanpham,mausac,kichco,loaisanpham,hangsanxuat WHERE sanpham.ma_mau = mausac.ma_mau AND sanpham.ma_loai = loaisanpham.ma_loai AND sanpham.ma_kich_co = kichco.ma_kich_co AND sanpham.ma_hang_sx = hangsanxuat.ma_hang_sx");
+		clsDataBase::query("SELECT sanpham.*,mausac.ten_mau,kichco.kich_co,loaisanpham.ten_loai,hangsanxuat.ten_hang_sx FROM sanpham,mausac,kichco,loaisanpham,hangsanxuat WHERE sanpham.ma_mau = mausac.ma_mau AND sanpham.ma_loai = loaisanpham.ma_loai AND sanpham.ma_kich_co = kichco.ma_kich_co AND sanpham.ma_hang_sx = hangsanxuat.ma_hang_sx ORDER BY ma_san_pham DESC");
 		if (clsDataBase::numRows() > 0) {
 			return clsDataBase::fetchAll();
 		} else {
-			return false;
+			return str_replace("'","",clsDataBase::getError());
 		}
 	}
 
@@ -16,7 +16,7 @@ class clsSanPham {
         if (clsDataBase::numRows() > 0) {
             return clsDataBase::fetch();
         } else {
-            return false;
+            return str_replace("'","",clsDataBase::getError());
         }
     }
 
@@ -27,14 +27,14 @@ class clsSanPham {
 			if (clsDataBase::effectRow() > 0) {
 				return true;
 			}
-			return false;
+			return str_replace("'","",clsDataBase::getError());
 		} else {
 			//Cap nhat sp binh thuong
 			clsDataBase::query("UPDATE sanpham SET san_pham_hot = 0 WHERE ma_san_pham = '$maSP'");
 			if (clsDataBase::effectRow() > 0) {
 				return true;
 			}
-			return false;
+			return str_replace("'","",clsDataBase::getError());
 		}
 	}
 
@@ -45,14 +45,14 @@ class clsSanPham {
 			if (clsDataBase::effectRow() > 0) {
 				return true;
 			}
-			return false;
+			return str_replace("'","",clsDataBase::getError());
 		} else {
 			//Ẩn sản phẩm
 			clsDataBase::query("UPDATE sanpham SET trang_thai = 0 WHERE ma_san_pham = '$maSP'");
 			if (clsDataBase::effectRow() > 0) {
 				return true;
 			}
-			return false;
+			return str_replace("'","",clsDataBase::getError());
 		}
 	}
 
@@ -66,7 +66,7 @@ class clsSanPham {
 		if(clsDataBase::effectRow()>0){
 			return true;
 		}
-		return false;				
+		return str_replace("'","",clsDataBase::getError());				
 	}
 
     /*
@@ -78,6 +78,6 @@ class clsSanPham {
         if(clsDataBase::effectRow()>=0){
             return true;
         }
-        return false;
+        return str_replace("'","",clsDataBase::getError());
     }
 }

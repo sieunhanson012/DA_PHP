@@ -36,7 +36,7 @@ if (!empty($kiemTraMauMoi) && empty($kiemtraKichCoMoi)) { //Kiểm tra màu m�
     //Thêm màu mới
     if (!is_integer($resultMauMoi)) {
         //Thêm màu thất bại
-        $_SESSION["notify"] = "Màu sắc đã tồn tại";
+        $_SESSION["notify-fail"] = "Màu sắc đã tồn tại";
         header("Location: ../index.php?page=them-san-pham");
     }
 
@@ -44,13 +44,14 @@ if (!empty($kiemTraMauMoi) && empty($kiemtraKichCoMoi)) { //Kiểm tra màu m�
     $resultHinhAnh = helper::themHinhAnh($hinhAnh);
     if (!is_string($resultHinhAnh)) {
         //Thêm hình thất bại
-        $_SESSION["notify"] = "Thêm hình thất bại";
+        $_SESSION["notify-fail"] = "Thêm hình thất bại";
         header("Location: ../index.php?page=them-san-pham");
     }
     //Thêm sản phẩm
     $temp = clsSanPham::them($resultMauMoi, $loaiSanPham, $kichCoCu, $hangSanXuat, $tenSP, $giaBan, $chatLieu, $resultHinhAnh, $thongTin, $ngayHienTai, $soLuong);
     if ($temp) {
-        $_SESSION["notify"] = "Thêm sản phẩm <strong>$tenSP</strong> thành công";
+        $_SESSION["focus"] = $tenSP;
+        $_SESSION["notify-success"] = "Thêm sản phẩm <strong>$tenSP</strong> thành công";
         header("Location: ../index.php?page=san-pham");
     }
 
@@ -60,20 +61,21 @@ if (!empty($kiemTraMauMoi) && empty($kiemtraKichCoMoi)) { //Kiểm tra màu m�
     $resulutKichCo = clsKichCo::them($kichCoMoi);
     if (!is_integer($resulutKichCo)) {
         //Thêm kích cỡ thất bại
-        $_SESSION["notify"] = "Kích cỡ đã tồn tại";
+        $_SESSION["notify-fail"] = "Kích cỡ đã tồn tại";
         header("Location: ../index.php?page=them-san-pham");
     }
     //Thêm hình ảnh
     $resultHinhAnh = helper::themHinhAnh($hinhAnh);
     if (!is_string($resultHinhAnh)) {
         //Thêm hình thất bại
-        $_SESSION["notify"] = "Thêm hình thất bại";
+        $_SESSION["notify-fail"] = "Thêm hình thất bại";
         header("Location: ../index.php?page=them-san-pham");
     }
     //Thêm sản phẩm
     $temp = clsSanPham::them($mauSacCu, $loaiSanPham, $resulutKichCo, $hangSanXuat, $tenSP, $giaBan, $chatLieu, $resultHinhAnh, $thongTin, $ngayHienTai, $soLuong);
     if ($temp) {
-        $_SESSION["notify"] = "Thêm sản phẩm <strong>$tenSP</strong> thành công";
+        $_SESSION["focus"] = $tenSP;
+        $_SESSION["notify-success"] = "Thêm sản phẩm <strong>$tenSP</strong> thành công";
         header("Location: ../index.php?page=san-pham");
     }
 } elseif (!empty($kiemtraKichCoMoi) && !empty($kiemTraMauMoi)) {//Kiểm tra màu và kích cỡ mới
@@ -81,28 +83,29 @@ if (!empty($kiemTraMauMoi) && empty($kiemtraKichCoMoi)) { //Kiểm tra màu m�
     $mauSacMoi = $_REQUEST["txtMauMoi"];
     $resultMauSac = clsMauSac::them($mauSacMoi);
     if (!is_integer($resultMauSac)) {
-        $_SESSION["notify"] = "Màu sắc đã tồn tại";
+        $_SESSION["notify-fail"] = "Màu sắc đã tồn tại";
         header("Location: ../index.php?page=them-san-pham");
     }
     //Thêm kích cỡ
     $kichCoMoi = $_REQUEST["txtKichCoMoi"];
     $resultKichCo = clsKichCo::them($kichCoMoi);
     if (!is_integer($resultKichCo)) {
-        $_SESSION["notify"] = "Kích cỡ đã tồn tại";
+        $_SESSION["notify-fail"] = "Kích cỡ đã tồn tại";
         header("Location: ../index.php?page=them-san-pham");
     }
 
     //Thêm hình ảnh
     $resultHinhAnh = helper::themHinhAnh($hinhAnh);
     if (!is_string($resultHinhAnh)) {
-        $_SESSION["notify"] = "Thêm hình ảnh thất bại";
+        $_SESSION["notify-fail"] = "Thêm hình ảnh thất bại";
         header("Location: ../index.php?page=them-san-pham");
     }
 
     //Thêm sản phẩm
     $temp = clsSanPham::them($resultMauSac, $loaiSanPham, $resultKichCo, $hangSanXuat, $tenSP, $giaBan, $chatLieu, $resultHinhAnh, $thongTin, $ngayHienTai, $soLuong);
     if ($temp) {
-        $_SESSION["notify"] = "Thêm sản phẩm <strong>$tenSP</strong> thành công";
+        $_SESSION["focus"] = $tenSP;
+        $_SESSION["notify-success"] = "Thêm sản phẩm <strong>$tenSP</strong> thành công";
         header("Location: ../index.php?page=san-pham");
     }
 } else { // màu cũ kích cỡ cũ
@@ -110,13 +113,14 @@ if (!empty($kiemTraMauMoi) && empty($kiemtraKichCoMoi)) { //Kiểm tra màu m�
     //Thêm hình ảnh
     $resultHinhAnh = helper::themHinhAnh($hinhAnh);
     if (!is_string($resultHinhAnh)) {
-        $_SESSION["notify"] = "Thêm hình ảnh thất bại";
+        $_SESSION["notify-fail"] = "Thêm hình ảnh thất bại";
         header("Location: ../index.php?page=them-san-pham");
     }
     //thêm sản phẩm
     $temp = clsSanPham::them($mauSacCu, $loaiSanPham, $kichCoCu, $hangSanXuat, $tenSP, $giaBan, $chatLieu, $resultHinhAnh, $thongTin, $ngayHienTai, $soLuong);
     if ($temp) {
-        $_SESSION["notify"] = "Thêm sản phẩm <strong>$tenSP</strong> thành công";
+        $_SESSION["focus"] = $tenSP;
+        $_SESSION["notify-success"] = "Thêm sản phẩm <strong>$tenSP</strong> thành công";
         header("Location: ../index.php?page=san-pham");
     }
 }

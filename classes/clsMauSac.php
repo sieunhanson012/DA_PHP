@@ -7,7 +7,7 @@ class clsMauSac {
 		if (clsDataBase::numRows() > 0) {
 			return clsDataBase::fetchAll();
 		}
-		return false;
+		return str_replace("'","",clsDataBase::getError());
 	}
 
 	/**
@@ -18,13 +18,13 @@ class clsMauSac {
 	public static function them($tenMau){
 		clsDataBase::query("SELECT ten_mau FROM mausac WHERE ten_mau = '$tenMau'");
 		if(clsDataBase::numRows()>0){
-			return false;
+			return str_replace("'","",clsDataBase::getError());
 		}else{
 			clsDataBase::query("INSERT INTO mausac(ten_mau) VALUES('$tenMau')");
 			if (clsDataBase::effectRow() > 0) {
 				return clsDataBase::lastID();
 			}
-			return false;
+			return str_replace("'","",clsDataBase::getError());
 		}
 	}
 }

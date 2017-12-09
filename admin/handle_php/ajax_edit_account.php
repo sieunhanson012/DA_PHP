@@ -11,13 +11,14 @@ if (!empty($_POST["maTK"])) {
     $_SoDienThoai = $_POST["soDienThoai"];
     $_Quyen = $_POST["quyen"];
 } else {
-    die(404);
+    die('404');
 }
 
 clsDataBase::openConnect();
-if (clsTaiKhoan::Sua($_MaTK, $_HoTen, $_MatKhau, $_SoDienThoai, $_Quyen)) {
+$resultTaiKhoan = clsTaiKhoan::Sua($_MaTK, $_HoTen, $_MatKhau, $_SoDienThoai, $_Quyen);
+if (is_bool($resultTaiKhoan)) {
     helper::alertSuccessString("Sửa tài khoản <strong>$_TenTK</strong>  thành công");
 } else {
-    helper::alertDangerString("Sửa tài khoản <strong>$_TenTK</strong> thất bại");
+    helper::alertDangerString($resultTaiKhoan);
 }
 clsDataBase::closeConnect();

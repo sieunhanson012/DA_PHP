@@ -12,9 +12,12 @@ $_tenHSX = $_POST["tenHSX"];
 $_ghiChu = $_POST["ghiChu"];
 
 clsDataBase::openConnect();
-if (clsHangSanXuat::Sua($_maHSX, $_tenHSX, $_ghiChu)) {
+$resultHSX = clsHangSanXuat::Sua($_maHSX, $_tenHSX, $_ghiChu);
+if (is_bool($resultHSX) && ($resultHSX)) {
     helper::alertSuccessString("Sửa hãng sản xuất <strong>$_tenHSX</strong> thành công");
-} else {
+} elseif(!$resultHSX) {
     helper::alertDangerString("Hãng sản xuất <strong>$_tenHSX</strong> đã tồn tại");
+}else{
+    helper::alertDangerString($resultHSX);
 }
 clsDataBase::closeConnect();

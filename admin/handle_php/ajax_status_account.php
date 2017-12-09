@@ -12,17 +12,19 @@ if (!empty($_REQUEST["ma_tai_khoan"])) {
 if (isset($_REQUEST["ac"])) {
     if ($_REQUEST["ac"] == "lock") {
         //Khóa tài khoản
-        if (clsTaiKhoan::khoaTaiKhoan($maTK)) {
+        $resultTaiKhoan = clsTaiKhoan::khoaTaiKhoan($maTK);
+        if (is_bool($resultTaiKhoan)) {
             helper::alertDangerString("Khóa tài khoản <strong>$tenTK</strong> thành công ");
         } else {
-            helper::alertDangerString("Thất bại vui lòng thử lại!");
+            helper::alertDangerString($resultTaiKhoan);
         }
     } elseif ($_REQUEST["ac"] == "unlock") {
         //Mở khóa tài khoản
-        if (clsTaiKhoan::moKhoaTaiKhoan($maTK)) {
+        $resultTaiKhoan =clsTaiKhoan::moKhoaTaiKhoan($maTK);
+        if (is_bool($resultTaiKhoan)) {
             helper::alertSuccessString("Mở khóa tài <strong>$tenTK</strong> khoản thành công");
         } else {
-            helper::alertDangerString("Thất bại vui lòng thử lại!");
+            helper::alertDangerString($resultTaiKhoan);
         }
     }
 }
