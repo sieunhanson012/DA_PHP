@@ -19,82 +19,72 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="../components/user/images/cart/one.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
 
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="../components/user/images/cart/two.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="../components/user/images/cart/three.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
+						<?php 
+
+							if(isset($_SESSION["Gio_Hang"])){
+								
+								foreach ($_SESSION["Gio_Hang"] as $key => $rows) {
+									
+									?>
+										<tr id="bangsanpham_<?=$rows['masanpham']?>">
+											<td class="cart_product">
+												<a href=""><img style="max-width: 100px;height: auto;" src="../images/<?=$rows['hinhanh']?>" alt=""></a>
+											</td>
+											<td class="cart_description">
+												<h4><a href="?page=chi-tiet-san-pham.php&&id=<?=$rows['masanpham']?>"><?=$rows['tensanpham']?></a></h4>
+												<p><?=$rows['loaisanpham']?></p>
+											</td>
+											<td class="cart_price">
+												<p><?= number_format($rows['gia'])?> VNĐ</p>
+											</td>
+											<td class="cart_quantity">
+												<div class="cart_quantity_button">
+												
+													<input class="cart_quantity_input" style="max-width: 50px;" type="number" name="quantity" value="<?=$rows['soluong']?>" autocomplete="off" size="2">
+													
+												</div>
+											</td>
+											<td class="cart_total">
+												<p class="cart_total_price"><?= number_format($rows['tongtien'])?> VNĐ</p>
+											</td>
+											<td class="cart_delete">
+												<a class="cart_quantity_delete btn" onclick="XoaSanPhamTrongGioHang(<?=$rows['masanpham']?>)"><i class="fa fa-times"></i></a>
+											</td>
+										</tr>
+									<?php
+								}
+							}else{
+								?>
+								<tr>
+											<td class="cart_product">
+												
+											</td>
+											<td class="cart_description">
+												<h4><a href="">Chưa có sản phẩm nào</a></h4>
+												
+											</td>
+											<td class="cart_price">
+											
+											</td>
+											<td class="cart_quantity">
+												
+											</td>
+											<td class="cart_total">
+												
+											</td>
+											<td class="cart_delete">
+												
+											</td>
+										</tr>
+								
+							<?php
+							}
+							
+						 ?>
+						
+
+						
 					</tbody>
 				</table>
 			</div>
@@ -165,15 +155,34 @@
 				<div class="col-sm-6">
 					<div class="total_area">
 						<ul>
-							<li>Cart Sub Total <span>$59</span></li>
+							
 							<li>Eco Tax <span>$2</span></li>
 							<li>Shipping Cost <span>Free</span></li>
-							<li>Total <span>$61</span></li>
+							<li>Tổng giá tiền : <span class="tongtientronggiohang">$61</span></li>
 						</ul>
 							<a class="btn btn-default update" href="">Update</a>
-							<a class="btn btn-default check_out" href="">Check Out</a>
+							<a class="btn btn-default check_out" href="">Thanh toán</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section><!--/#do_action-->
+
+	<script type="text/javascript">
+		function XoaSanPhamTrongGioHang(Id){
+			$.post("xuly_code/xuly_themgiohang.php",{
+				"ThaoTac":"XoaSanPhamTrongGioHang",
+				"ID":Id,
+				
+			},function(data,status){
+				if(data=="xoa thanh cong"){
+					$("#bangsanpham_"+Id+"").remove();
+					alertify.success('Đã xoa sản phẩm khỏi giỏ hàng');
+				}
+			});
+		};
+		$(document).ready(function(){
+			
+
+		});
+	</script>

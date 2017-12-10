@@ -15,10 +15,18 @@ session_start(); ?>
 				break;
 			case 'dang-nhap.php':
 				include_once('dang-nhap.php');
+				break;
 			case 'gio-hang.php':
 				include_once('gio-hang.php');
+				break;
+			case '404.php':
+				include_once('404.php');
+				break;
+			case 'trang-danh-muc.php':
+				include_once('trang-danh-muc.php');
+				break;
 			default:
-				# code...
+				include_once('404.php');
 				break;
 		}
 	}

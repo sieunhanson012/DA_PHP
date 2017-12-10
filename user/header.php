@@ -1,5 +1,10 @@
 <?php 
-	
+	if(isset($_POST['thaotac'])){
+		if($_POST['thaotac']=='dangxuat'){
+			session_destroy();
+
+		}
+	}
  ?>
 <header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
@@ -65,8 +70,8 @@
 								<?php 
 									if(isset($_SESSION['ten_dang_nhap'])){
 										?>
-										<li><a href="?page=dang-nhap.php"><i class="fa fa-user"></i> <?=$_SESSION['ho_ten']?></a></li>
-										<li><a href=""><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
+										<li><a href="#"><i class="fa fa-user"></i> <?=$_SESSION['ho_ten']?></a></li>
+										<li><a class="btn" id="submit-signout"><i class="fa fa-sign-out"></i> Đăng xuất</a></li>
 										<?php
 									}
 									else{
@@ -80,6 +85,7 @@
 								<li><a href="?page=gio-hang.php"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
 								
 							</ul>
+							
 						</div>
 					</div>
 				</div>
@@ -116,7 +122,7 @@
 										<li><a href="blog-single.html">Blog Single</a></li>
                                     </ul>
                                 </li> 
-								<li><a href="404.html">404</a></li>
+								
 								<li><a href="contact-us.html">Liên hệ</a></li>
 							</ul>
 						</div>
@@ -130,3 +136,5 @@
 			</div>
 		</div><!--/header-bottom-->
 	</header><!--/header-->
+
+	

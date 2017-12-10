@@ -1,6 +1,7 @@
 <?php 
 clsDataBase::openConnect();
 $data_hangsp =clsSanPham::LayBangHangSX();
+$data_sanpham=clsSanPham::LayTatCaSanPham();
 clsDataBase::closeConnect();
 
 
@@ -81,158 +82,64 @@ clsDataBase::closeConnect();
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">SẢN PHẨM NỔI BẬT</h2>
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-										<div class="productinfo text-center">
-											<img src="../components/user/images/home/product1.jpg" alt="" />
-											<h2>$56</h2>
-											<a href="?page=chi-tiet-san-pham.php"><p>Easy Polo Black Edition</p></a>
-											<a href="?page=chi-tiet-san-pham.php" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-										</div>
-										<div class="product-overlay">
-											<div class="overlay-content">
-												<a href="?page=chi-tiet-san-pham.php"><h2>$56</h2></a>
-												<a href="?page=chi-tiet-san-pham.php"><p>Easy Polo Black Edition</p></a>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+						<?php 
+							foreach ($data_sanpham as $sp => $rows) {
+								?>
+										<div class="col-sm-4">
+											<div class="product-image-wrapper">
+												<div class="single-products">
+														<div class="productinfo text-center">
+															<img src="../components/user/images/home/product1.jpg" alt="" />
+															<h2><?= number_format($rows['gia_ban']) ?> VNĐ</h2>
+															<a href="?page=chi-tiet-san-pham.php"><p><?=$rows['ten_san_pham']?></p></a>
+															<a href="?page=chi-tiet-san-pham.php" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
+														</div>
+														<div class="product-overlay">
+															<div class="overlay-content">
+																<a href="?page=chi-tiet-san-pham.php&&id=<?=$rows['ma_san_pham']?>"><h2><?= number_format($rows['gia_ban']) ?> VNĐ</h2></a>
+																<a href="?page=chi-tiet-san-pham.php&&id=<?=$rows['ma_san_pham']?>"><p><?=$rows['ten_san_pham']?></p></a>
+																<a href="javascript:ThemVaoGioHang(<?=$rows['ma_san_pham']?>);" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ</a>
+															</div>
+														</div>
+												</div>
+												<div class="choose">
+													<ul class="nav nav-pills nav-justified">
+														<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+														<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+													</ul>
+												</div>
 											</div>
 										</div>
-								</div>
-								<div class="choose">
-									<ul class="nav nav-pills nav-justified">
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="../components/user/images/home/product2.jpg" alt="" />
-										<h2>$56</h2>
-										<p>Easy Polo Black Edition</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-										</div>
-									</div>
-								</div>
-								<div class="choose">
-									<ul class="nav nav-pills nav-justified">
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="../components/user/images/home/product3.jpg" alt="" />
-										<h2>$56</h2>
-										<p>Easy Polo Black Edition</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-										</div>
-									</div>
-								</div>
-								<div class="choose">
-									<ul class="nav nav-pills nav-justified">
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="../components/user/images/home/product4.jpg" alt="" />
-										<h2>$56</h2>
-										<p>Easy Polo Black Edition</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-										</div>
-									</div>
-									<img src="../components/user/images/home/new.png" class="new" alt="" />
-								</div>
-								<div class="choose">
-									<ul class="nav nav-pills nav-justified">
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="../components/user/images/home/product5.jpg" alt="" />
-										<h2>$56</h2>
-										<p>Easy Polo Black Edition</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-										</div>
-									</div>
-									<img src="../components/user/images/home/sale.png" class="new" alt="" />
-								</div>
-								<div class="choose">
-									<ul class="nav nav-pills nav-justified">
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
-									<div class="productinfo text-center">
-										<img src="../components/user/images/home/product6.jpg" alt="" />
-										<h2>$56</h2>
-										<p>Easy Polo Black Edition</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-									</div>
-									<div class="product-overlay">
-										<div class="overlay-content">
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-										</div>
-									</div>
-								</div>
-								<div class="choose">
-									<ul class="nav nav-pills nav-justified">
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
+										 <script type="text/javascript">
+						 	function ThemVaoGioHang(ID){
+						 	
+							
+
+							$.post("xuly_code/xuly_themgiohang.php",
+							{
+								"ThaoTac":"ThemVaoGioHang",
+								"ID":ID,
+								"SoLuong":1,
+							},
+							function(data,status){
+								if(data=="thanh cong"){
+									alertify.success('Đã thêm sản phẩm vào giỏ hàng');
+								}else{
+									if(data=="khong du san pham"){
+										alertify.error('Không đủ số lượng');
+									}else{
+										alertify.error('không có sản phẩm này');
+									}
+								}
+							}
+							);
+						 	}
+						 </script>
+								<?php
+							}
+						 ?>
+						
+						
 						
 					</div><!--features_items-->
 					

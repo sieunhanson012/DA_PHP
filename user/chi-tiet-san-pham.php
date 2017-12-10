@@ -1,3 +1,26 @@
+<?php 
+	if(isset($_GET['id']) && $_GET['id']>0){
+		$id=$_GET['id'];
+		clsDataBase::openConnect();
+		$data_sanpham=clsSanPham::LaySanPhamTheoId($_GET['id']);
+		$data_kichco=clsSanPham::LayKichCoTheoSanPham($_GET['id']);
+		if(isset($_POST['dangbinhluan']) && $_POST['noidungbinhluan']!="" ){
+			if(clsTaiKhoan::ThemBinhLuan($_SESSION['ma_tai_khoan'],$_POST['noidungbinhluan'])){
+				
+			}
+
+		}
+
+
+		clsDataBase::closeConnect();
+
+
+
+	}else{
+		echo "<script>window.location.href='?page=404.php'</script>";
+	}
+
+ ?>
 <section>
 		<div class="container">
 			<div class="row">
@@ -49,32 +72,60 @@
 						<div class="col-sm-7">
 							<div class="product-information"><!--/product-information-->
 								<img src="../components/user/images/product-details/new.jpg" class="newarrival" alt="" />
-								<h2>Anne Klein Sleeveless Colorblock Scuba</h2>
-								<p>Web ID: 1089772</p>
+								<h2><?=$data_sanpham['ten_san_pham']?></h2>
+								<p>Thương hiệu : <?=$data_sanpham['ten_hang_sx']?></p>
 								<img src="../components/user/images/product-details/rating.png" alt="" />
 								<span>
-									<span>US $59</span>
+									<span><?= number_format($data_sanpham['gia_ban'])?> VNĐ</span>
 									<label>Số lượng:</label>
-									<input type="text" value="3" />
-									<button type="button" class="btn btn-fefault cart">
+									<input id="soluong" type="number" value="1" />
+									<a type="btn" href="javascript:ThemVaoGioHang();" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Thêm vào giỏ
-									</button>
+									</a>
 								</span>
-								<p><b>Availability:</b> In Stock</p>
-								<p><b>Condition:</b> New</p>
-								<p><b>Brand:</b> E-SHOPPER</p>
+								<p><b>Loại : <?=$data_sanpham['ten_loai']?></b></p>
+								<p><b>Kích cỡ : <?=$data_kichco[0]['kich_co']?></p> 
+							
+								<p><b>Chất liệu:</b> <?=$data_sanpham['chat_lieu']?></p>
+								<p><b>Màu : <?=$data_sanpham['ten_mau']?></p> 
 								<a href=""><img src="../components/user/images/product-details/share.png" class="share img-responsive"  alt="" /></a>
 							</div><!--/product-information-->
 						</div>
 					</div><!--/product-details-->
-					
+					<script type="text/javascript">
+						function ThemVaoGioHang(){
+							var id="<?= $id?>";
+							var soluong = $("#soluong").val();
+
+							$.post("xuly_code/xuly_themgiohang.php",
+							{
+								"ThaoTac":"ThemVaoGioHang",
+								"ID":id,
+								"SoLuong":soluong,
+							},
+							function(data,status){
+								if(data=="thanh cong"){
+									alertify.success('Đã thêm sản phẩm vào giỏ hàng');
+								}else{
+									if(data=="khong du san pham"){
+										alertify.error('Không đủ số lượng');
+									}else{
+										alertify.error('không có sản phẩm này');
+									}
+								}
+							}
+							);
+						}
+
+					</script>
+
 					<div class="category-tab shop-details-tab"><!--category-tab-->
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
 								<li><a href="#details" data-toggle="tab">Details</a></li>
 								<li><a href="#companyprofile" data-toggle="tab">Company Profile</a></li>
-								<li><a href="#tag" data-toggle="tab">Tag</a></li>
+								
 								<li class="active"><a href="#reviews" data-toggle="tab">Đánh giá (5)</a></li>
 							</ul>
 						</div>
@@ -181,79 +232,48 @@
 								</div>
 							</div>
 							
-							<div class="tab-pane fade" id="tag" >
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="../components/user/images/home/gallery1.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="../components/user/images/home/gallery2.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="../components/user/images/home/gallery3.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="../components/user/images/home/gallery4.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
 							
-							<div class="tab-pane fade active in" id="reviews" >
+							<div class="tab-pane fade active in" id="reviews">
 								<div class="col-sm-12">
+									<?php 
+											if(isset($_SESSION['ten_dang_nhap'])){
+												date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+												?>
 									<ul>
-										<li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-										<li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-										<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
+										<li><a href=""><i class="fa fa-user"></i><?=$_SESSION['ten_dang_nhap']?></a></li>
+										<li><a href=""><i class="fa fa-clock-o"></i><?=date('H:i:s')?></a></li> 
+										<li><a href=""><i class="fa fa-calendar-o"></i><?=date('d-m-Y')?></a></li>
 									</ul>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-									<p><b>Write Your Review</b></p>
 									
-									<form action="#">
-										<span>
-											<input type="text" placeholder="Your Name"/>
-											<input type="email" placeholder="Email Address"/>
-										</span>
-										<textarea name="" ></textarea>
-										<b>Rating: </b> <img src="../components/user/images/product-details/rating.png" alt="" />
-										<button type="button" class="btn btn-default pull-right">
-											Đăng bình luận
-										</button>
+									
+									
+									<form action="#" method="POST">
+										
+													<p><b>Viết bình luận</b></p>
+													
+													<textarea name="noidungbinhluan" ></textarea>
+													<b>Rating: </b> <img src="../components/user/images/product-details/rating.png" alt="" />
+													<button type="submit" name="dangbinhluan" class="btn btn-default pull-right">
+														Đăng bình luận
+													</button>
+												<?php
+											}else{
+												echo "<p>Vui lòng đăng nhập để bình luận</p>";
+											}
+										 ?>
+										
 									</form>
 								</div>
+								<?php 
+
+								 ?>
+								<ul>
+										<li><a href=""><i class="fa fa-user"></i>admin</a></li>
+										<li><a href=""><i class="fa fa-clock-o"></i>10:35:20</a></li> 
+										<li><a href=""><i class="fa fa-calendar-o"></i>09-12-2017</a></li>
+								</ul>
+
 							</div>
 							
 						</div>

@@ -156,11 +156,17 @@
 		
 	</footer><!--/Footer-->
 	
-
+<script src="../components/user/js/alertify.js" type="text/javascript"></script>
   
-    <script src="../components/user/js/jquery.js"></script>
+    
 	<script src="../components/user/js/bootstrap.min.js"></script>
 	<script src="../components/user/js/jquery.scrollUp.min.js"></script>
 	<script src="../components/user/js/price-range.js"></script>
     <script src="../components/user/js/jquery.prettyPhoto.js"></script>
     <script src="../components/user/js/main.js"></script>
+
+	<script src="../components/admin/assets/js/bootstrap-notify.js"></script>
+	<script src="../components/admin/assets/js/jquery-confirm.min.js"></script>
+    <script type="text/javascript" src="xuly_ajax/ajax.js"></script>
+
+	<script src="../components/user/alertify/lib/alertify.min.js"></script>
